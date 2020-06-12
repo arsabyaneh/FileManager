@@ -36,8 +36,13 @@
             this.CurrentDirectoryLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.CurrentDirectory = new System.Windows.Forms.ToolStripStatusLabel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
+            this.FilesListView = new System.Windows.Forms.ListView();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewLargeIcons = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewList = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewSmallIcons = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewTiles = new System.Windows.Forms.ToolStripMenuItem();
             this.FileExplorer = new FileExplorer.Controls.Explorer();
-            this.ListView = new System.Windows.Forms.ListView();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -67,6 +72,12 @@
             // 
             // ViewMenuItem
             // 
+            this.ViewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewDetails,
+            this.ViewLargeIcons,
+            this.ViewList,
+            this.ViewSmallIcons,
+            this.ViewTiles});
             this.ViewMenuItem.Name = "ViewMenuItem";
             this.ViewMenuItem.Size = new System.Drawing.Size(44, 20);
             this.ViewMenuItem.Text = "&View";
@@ -102,6 +113,7 @@
             this.CurrentDirectory.AutoSize = false;
             this.CurrentDirectory.Name = "CurrentDirectory";
             this.CurrentDirectory.Size = new System.Drawing.Size(680, 17);
+            this.CurrentDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SplitContainer
             // 
@@ -115,10 +127,53 @@
             // 
             // SplitContainer.Panel2
             // 
-            this.SplitContainer.Panel2.Controls.Add(this.ListView);
+            this.SplitContainer.Panel2.Controls.Add(this.FilesListView);
             this.SplitContainer.Size = new System.Drawing.Size(800, 404);
             this.SplitContainer.SplitterDistance = 197;
             this.SplitContainer.TabIndex = 2;
+            // 
+            // FilesListView
+            // 
+            this.FilesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilesListView.HideSelection = false;
+            this.FilesListView.Location = new System.Drawing.Point(0, 0);
+            this.FilesListView.Name = "FilesListView";
+            this.FilesListView.Size = new System.Drawing.Size(599, 404);
+            this.FilesListView.TabIndex = 0;
+            this.FilesListView.UseCompatibleStateImageBehavior = false;
+            this.FilesListView.View = System.Windows.Forms.View.Details;
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Checked = true;
+            this.ViewDetails.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(134, 22);
+            this.ViewDetails.Text = "Details";
+            // 
+            // ViewLargeIcons
+            // 
+            this.ViewLargeIcons.Name = "ViewLargeIcons";
+            this.ViewLargeIcons.Size = new System.Drawing.Size(134, 22);
+            this.ViewLargeIcons.Text = "Large icons";
+            // 
+            // ViewList
+            // 
+            this.ViewList.Name = "ViewList";
+            this.ViewList.Size = new System.Drawing.Size(134, 22);
+            this.ViewList.Text = "List";
+            // 
+            // ViewSmallIcons
+            // 
+            this.ViewSmallIcons.Name = "ViewSmallIcons";
+            this.ViewSmallIcons.Size = new System.Drawing.Size(134, 22);
+            this.ViewSmallIcons.Text = "Small icons";
+            // 
+            // ViewTiles
+            // 
+            this.ViewTiles.Name = "ViewTiles";
+            this.ViewTiles.Size = new System.Drawing.Size(134, 22);
+            this.ViewTiles.Text = "Tiles";
             // 
             // FileExplorer
             // 
@@ -127,17 +182,7 @@
             this.FileExplorer.Name = "FileExplorer";
             this.FileExplorer.Size = new System.Drawing.Size(197, 404);
             this.FileExplorer.TabIndex = 0;
-            // 
-            // ListView
-            // 
-            this.ListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListView.HideSelection = false;
-            this.ListView.Location = new System.Drawing.Point(0, 0);
-            this.ListView.Name = "ListView";
-            this.ListView.Size = new System.Drawing.Size(599, 404);
-            this.ListView.TabIndex = 0;
-            this.ListView.UseCompatibleStateImageBehavior = false;
-            this.ListView.View = System.Windows.Forms.View.Details;
+            this.FileExplorer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.FileExplorer_AfterSelect);
             // 
             // Form1
             // 
@@ -173,8 +218,13 @@
         private System.Windows.Forms.ToolStripStatusLabel CurrentDirectory;
         private System.Windows.Forms.ToolStripMenuItem ViewMenuItem;
         private System.Windows.Forms.SplitContainer SplitContainer;
-        private System.Windows.Forms.ListView ListView;
+        private System.Windows.Forms.ListView FilesListView;
         private Controls.Explorer FileExplorer;
+        private System.Windows.Forms.ToolStripMenuItem ViewDetails;
+        private System.Windows.Forms.ToolStripMenuItem ViewLargeIcons;
+        private System.Windows.Forms.ToolStripMenuItem ViewList;
+        private System.Windows.Forms.ToolStripMenuItem ViewSmallIcons;
+        private System.Windows.Forms.ToolStripMenuItem ViewTiles;
     }
 }
 
