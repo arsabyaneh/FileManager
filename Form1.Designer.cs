@@ -1,4 +1,4 @@
-﻿namespace FileExplorer
+﻿namespace FileManager
 {
     partial class Form1
     {
@@ -41,7 +41,7 @@
             this.CurrentDirectoryLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.CurrentDirectory = new System.Windows.Forms.ToolStripStatusLabel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
-            this.FileExplorer = new FileExplorer.Controls.Explorer();
+            this.NavigationPanel = new FileManager.Controls.Navigation();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -153,20 +153,20 @@
             // 
             // SplitContainer.Panel1
             // 
-            this.SplitContainer.Panel1.Controls.Add(this.FileExplorer);
+            this.SplitContainer.Panel1.Controls.Add(this.NavigationPanel);
             this.SplitContainer.Size = new System.Drawing.Size(800, 404);
             this.SplitContainer.SplitterDistance = 197;
             this.SplitContainer.TabIndex = 2;
             // 
-            // FileExplorer
+            // NavigationPanel
             // 
-            this.FileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.FileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileExplorer.Location = new System.Drawing.Point(0, 0);
-            this.FileExplorer.Name = "FileExplorer";
-            this.FileExplorer.Size = new System.Drawing.Size(197, 404);
-            this.FileExplorer.TabIndex = 0;
-            this.FileExplorer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.FileExplorer_AfterSelect);
+            this.NavigationPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.NavigationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NavigationPanel.Location = new System.Drawing.Point(0, 0);
+            this.NavigationPanel.Name = "NavigationPanel";
+            this.NavigationPanel.Size = new System.Drawing.Size(197, 404);
+            this.NavigationPanel.TabIndex = 0;
+            this.NavigationPanel.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.NavigationPanel_AfterSelect);
             // 
             // Form1
             // 
@@ -201,12 +201,12 @@
         private System.Windows.Forms.ToolStripStatusLabel CurrentDirectory;
         private System.Windows.Forms.ToolStripMenuItem ViewMenuItem;
         private System.Windows.Forms.SplitContainer SplitContainer;
-        private Controls.Explorer FileExplorer;
         private System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.ToolStripMenuItem ViewLargeIcons;
         private System.Windows.Forms.ToolStripMenuItem ViewList;
         private System.Windows.Forms.ToolStripMenuItem ViewSmallIcons;
         private System.Windows.Forms.ToolStripMenuItem ViewTiles;
+        private Controls.Navigation NavigationPanel;
     }
 }
 

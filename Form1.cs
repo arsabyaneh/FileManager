@@ -1,33 +1,31 @@
-﻿using FileExplorer.Controls;
+﻿using FileManager.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FileExplorer
+namespace FileManager
 {
     public partial class Form1 : Form
     {
-        private FilesPane FilesListView;
+        private Explorer FilesListView;
 
         public Form1()
         {
             InitializeComponent();
 
-            FilesListView = new FilesPane();
+            FilesListView = new Explorer();
             FilesListView.Initialize();
             SplitContainer.Panel2.Controls.Add(FilesListView);
 
             InitializeViewOptions();
         }
 
-        private void FileExplorer_AfterSelect(object sender, TreeViewEventArgs e)
+        private void NavigationPanel_AfterSelect(object sender, TreeViewEventArgs e)
         {
             FilesListView.Items.Clear();
             FilesListView.LargeImageList.Images.Clear();

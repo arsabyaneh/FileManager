@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileExplorer.Properties
+namespace FileManager.Properties
 {
 
 

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6A6B4F27-798B-4406-A073-F03B9A030B98}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FileExplorer</RootNamespace>
-    <AssemblyName>FileExplorer</AssemblyName>
+    <RootNamespace>FileManager</RootNamespace>
+    <AssemblyName>FileManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Explorer.cs">
+    <Compile Include="Controls\Navigation.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\FilesPane.cs">
+    <Compile Include="Controls\Explorer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FileType.cs" />
