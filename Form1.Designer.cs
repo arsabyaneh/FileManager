@@ -31,23 +31,21 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SearchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.CurrentDirectoryLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.CurrentDirectory = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SplitContainer = new System.Windows.Forms.SplitContainer();
-            this.FilesListView = new System.Windows.Forms.ListView();
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewLargeIcons = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewList = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewSmallIcons = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewTiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.CurrentDirectoryLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.CurrentDirectory = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.FileExplorer = new FileExplorer.Controls.Explorer();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
-            this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +79,38 @@
             this.ViewMenuItem.Name = "ViewMenuItem";
             this.ViewMenuItem.Size = new System.Drawing.Size(44, 20);
             this.ViewMenuItem.Text = "&View";
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Checked = true;
+            this.ViewDetails.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(134, 22);
+            this.ViewDetails.Text = "Details";
+            // 
+            // ViewLargeIcons
+            // 
+            this.ViewLargeIcons.Name = "ViewLargeIcons";
+            this.ViewLargeIcons.Size = new System.Drawing.Size(134, 22);
+            this.ViewLargeIcons.Text = "Large icons";
+            // 
+            // ViewList
+            // 
+            this.ViewList.Name = "ViewList";
+            this.ViewList.Size = new System.Drawing.Size(134, 22);
+            this.ViewList.Text = "List";
+            // 
+            // ViewSmallIcons
+            // 
+            this.ViewSmallIcons.Name = "ViewSmallIcons";
+            this.ViewSmallIcons.Size = new System.Drawing.Size(134, 22);
+            this.ViewSmallIcons.Text = "Small icons";
+            // 
+            // ViewTiles
+            // 
+            this.ViewTiles.Name = "ViewTiles";
+            this.ViewTiles.Size = new System.Drawing.Size(134, 22);
+            this.ViewTiles.Text = "Tiles";
             // 
             // SearchMenuItem
             // 
@@ -124,59 +154,13 @@
             // SplitContainer.Panel1
             // 
             this.SplitContainer.Panel1.Controls.Add(this.FileExplorer);
-            // 
-            // SplitContainer.Panel2
-            // 
-            this.SplitContainer.Panel2.Controls.Add(this.FilesListView);
             this.SplitContainer.Size = new System.Drawing.Size(800, 404);
             this.SplitContainer.SplitterDistance = 197;
             this.SplitContainer.TabIndex = 2;
             // 
-            // FilesListView
-            // 
-            this.FilesListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilesListView.HideSelection = false;
-            this.FilesListView.Location = new System.Drawing.Point(0, 0);
-            this.FilesListView.Name = "FilesListView";
-            this.FilesListView.Size = new System.Drawing.Size(599, 404);
-            this.FilesListView.TabIndex = 0;
-            this.FilesListView.UseCompatibleStateImageBehavior = false;
-            this.FilesListView.View = System.Windows.Forms.View.Details;
-            // 
-            // ViewDetails
-            // 
-            this.ViewDetails.Checked = true;
-            this.ViewDetails.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(134, 22);
-            this.ViewDetails.Text = "Details";
-            // 
-            // ViewLargeIcons
-            // 
-            this.ViewLargeIcons.Name = "ViewLargeIcons";
-            this.ViewLargeIcons.Size = new System.Drawing.Size(134, 22);
-            this.ViewLargeIcons.Text = "Large icons";
-            // 
-            // ViewList
-            // 
-            this.ViewList.Name = "ViewList";
-            this.ViewList.Size = new System.Drawing.Size(134, 22);
-            this.ViewList.Text = "List";
-            // 
-            // ViewSmallIcons
-            // 
-            this.ViewSmallIcons.Name = "ViewSmallIcons";
-            this.ViewSmallIcons.Size = new System.Drawing.Size(134, 22);
-            this.ViewSmallIcons.Text = "Small icons";
-            // 
-            // ViewTiles
-            // 
-            this.ViewTiles.Name = "ViewTiles";
-            this.ViewTiles.Size = new System.Drawing.Size(134, 22);
-            this.ViewTiles.Text = "Tiles";
-            // 
             // FileExplorer
             // 
+            this.FileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.FileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FileExplorer.Location = new System.Drawing.Point(0, 0);
             this.FileExplorer.Name = "FileExplorer";
@@ -200,7 +184,6 @@
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.SplitContainer.Panel1.ResumeLayout(false);
-            this.SplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -218,7 +201,6 @@
         private System.Windows.Forms.ToolStripStatusLabel CurrentDirectory;
         private System.Windows.Forms.ToolStripMenuItem ViewMenuItem;
         private System.Windows.Forms.SplitContainer SplitContainer;
-        private System.Windows.Forms.ListView FilesListView;
         private Controls.Explorer FileExplorer;
         private System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.ToolStripMenuItem ViewLargeIcons;

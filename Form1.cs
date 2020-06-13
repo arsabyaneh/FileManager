@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileExplorer.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,32 +14,41 @@ namespace FileExplorer
 {
     public partial class Form1 : Form
     {
-        private Size LargeIconSize;
-        private Size TileIconSize;
-        private Size SmallIconSize;
+        private FilesPane FilesListView;
 
         public Form1()
         {
             InitializeComponent();
 
-            InitializeFilesListView();
+            FilesListView = new FilesPane();
+            FilesListView.Initialize();
+            SplitContainer.Panel2.Controls.Add(FilesListView);
+
+            InitializeViewOptions();
         }
 
-        private void InitializeFilesListView()
+        private void FileExplorer_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            SmallIconSize = new Size(16, 16);
-            TileIconSize  = new Size(32, 32);
-            LargeIconSize = new Size(128, 128);
+            FilesListView.Items.Clear();
+            FilesListView.LargeImageList.Images.Clear();
+            FilesListView.SmallImageList.Images.Clear();
 
-            FilesListView.View = View.Details;
-            FilesListView.LargeImageList = new ImageList();
-            FilesListView.SmallImageList = new ImageList();
-            FilesListView.LargeImageList.ImageSize = TileIconSize;
-            FilesListView.SmallImageList.ImageSize = SmallIconSize;
-            FilesListView.Columns.Add("Name", 150, HorizontalAlignment.Left);
-            FilesListView.Columns.Add("Date Modified", 150, HorizontalAlignment.Left);
-            FilesListView.Columns.Add("Type", 100, HorizontalAlignment.Left);
+            string path = (string)e.Node.Tag;
+            try
+            {
+                FilesListView.ShowFiles(path);
+                FilesListView.ShowDirectories(path);
+            }
+            catch
+            {
 
+            }
+
+            this.CurrentDirectory.Text = path;
+        }
+
+        private void InitializeViewOptions()
+        {
             ViewDetails.Tag = View.Details;
             ViewLargeIcons.Tag = View.LargeIcon;
             ViewList.Tag = View.List;
@@ -51,51 +61,6 @@ namespace FileExplorer
             ViewList.Click += viewOptionClickHandler;
             ViewSmallIcons.Click += viewOptionClickHandler;
             ViewTiles.Click += viewOptionClickHandler;
-        }
-
-        private void FileExplorer_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            FilesListView.Items.Clear();
-            FilesListView.LargeImageList.Images.Clear();
-            FilesListView.SmallImageList.Images.Clear();
-
-            string path = (string)e.Node.Tag;
-            try
-            {
-                ShowFiles(path);
-            }
-            catch
-            {
-
-            }
-
-            this.CurrentDirectory.Text = path;
-        }
-
-        private void ShowFiles(string path)
-        {
-            string[] extensions = new[] { "*.jpg", "*.jpeg", "*.bmp", "*.png", "*.gif", "*.tiff" };
-            List<string> files = new List<string>();
-            int imageIndex = -1;
-
-            foreach (string extension in extensions)
-            {
-                files.AddRange(Directory.GetFiles(path, extension));
-            }
-
-            foreach (string file in files)
-            {
-                FilesListView.SmallImageList.Images.Add(Image.FromFile(file));
-                FilesListView.LargeImageList.Images.Add(Image.FromFile(file));
-
-                imageIndex++;
-
-                ListViewItem listViewItem = new ListViewItem(
-                    new string[] { Path.GetFileNameWithoutExtension(file), File.GetLastWriteTime(file).ToString(), Path.GetExtension(file).Substring(1) },
-                    imageIndex);
-                listViewItem.Tag = file;
-                FilesListView.Items.Add(listViewItem);
-            }
         }
 
         private void ViewOptions_Click(object sender, EventArgs e)
@@ -114,8 +79,6 @@ namespace FileExplorer
 
             ViewOption.Checked = true;
 
-            this.SuspendLayout();
-
             switch ((View)ViewOption.Tag)
             {
                 case View.Details:
@@ -124,12 +87,12 @@ namespace FileExplorer
 
                 case View.LargeIcon:
                     FilesListView.View = View.LargeIcon;
-                    if (FilesListView.LargeImageList.ImageSize != LargeIconSize)
+                    if (FilesListView.LargeImageList.ImageSize != FilesListView.LargeIconSize)
                     {
-                        FilesListView.LargeImageList.ImageSize = LargeIconSize;
+                        FilesListView.LargeImageList.ImageSize = FilesListView.LargeIconSize;
 
                         // change in Imagesize removes elements of LargeImageList.Images, thus we need the following
-                        UpdateIconImages();
+                        FilesListView.UpdateIconImages();
                     }
                     break;
 
@@ -143,25 +106,14 @@ namespace FileExplorer
 
                 case View.Tile:
                     FilesListView.View = View.Tile;
-                    if (FilesListView.LargeImageList.ImageSize != TileIconSize)
+                    if (FilesListView.LargeImageList.ImageSize != FilesListView.TileIconSize)
                     {
-                        FilesListView.LargeImageList.ImageSize = TileIconSize;
+                        FilesListView.LargeImageList.ImageSize = FilesListView.TileIconSize;
 
                         // change in Imagesize removes elements of LargeImageList.Images, thus we need the following
-                        UpdateIconImages();
+                        FilesListView.UpdateIconImages();
                     }
                     break;
-            }
-
-            this.ResumeLayout();
-        }
-
-        private void UpdateIconImages()
-        {
-            FilesListView.LargeImageList.Images.Clear();
-            foreach (ListViewItem item in FilesListView.Items)
-            {
-                FilesListView.LargeImageList.Images.Add(Image.FromFile((string)item.Tag));
             }
         }
     }
