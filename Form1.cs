@@ -25,6 +25,11 @@ namespace FileManager
             InitializeViewOptions();
         }
 
+        //private void FilesListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         private void NavigationPanel_AfterSelect(object sender, TreeViewEventArgs e)
         {
             FilesListView.Items.Clear();
@@ -41,6 +46,8 @@ namespace FileManager
             {
 
             }
+
+            FilesListView.SelectedNavigationNode = e.Node;
 
             this.CurrentDirectory.Text = path;
         }

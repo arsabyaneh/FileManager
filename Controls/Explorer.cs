@@ -11,6 +11,8 @@ namespace FileManager.Controls
 {
     public class Explorer : ListView
     {
+        public TreeNode SelectedNavigationNode { get; set; }
+
         public Size SmallIconSize { get; set; }
         public Size TileIconSize { get; set; }
         public Size LargeIconSize { get; set; }
@@ -35,6 +37,9 @@ namespace FileManager.Controls
             this.Columns.Add("Name", 150, HorizontalAlignment.Left);
             this.Columns.Add("Date Modified", 150, HorizontalAlignment.Left);
             this.Columns.Add("Type", 100, HorizontalAlignment.Left);
+            this.FullRowSelect = true;
+
+            this.MouseDoubleClick += FilesListView_MouseDoubleClick;
 
             InitializeFileTypes();
         }
@@ -171,6 +176,9 @@ namespace FileManager.Controls
                         Path.GetExtension(file).Substring(1).ToUpper() + fileType.Description },
                         this.SmallImageList.Images.Count - 1);
                     listViewItem.Tag = file;
+                    listViewItem.UseItemStyleForSubItems = false;
+                    listViewItem.SubItems[1].ForeColor = listViewItem.SubItems[2].ForeColor = Color.Gray;
+
                     this.Items.Add(listViewItem);
                 }
                 catch
@@ -202,6 +210,9 @@ namespace FileManager.Controls
                         Folder.Description },
                     this.SmallImageList.Images.Count - 1);
                 listViewItem.Tag = directory;
+                listViewItem.UseItemStyleForSubItems = false;
+                listViewItem.SubItems[1].ForeColor = listViewItem.SubItems[2].ForeColor = Color.Gray;
+
                 this.Items.Add(listViewItem);
             }
 
@@ -245,6 +256,52 @@ namespace FileManager.Controls
             }
 
             return Document;
+        }
+
+        private void FilesListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string path = (string)(sender as Explorer).SelectedItems[0].Tag;
+
+            if (!Directory.Exists(path))
+            {
+                // if the path represents a file
+
+                System.Diagnostics.Process.Start(path);
+            }
+            else
+            {
+                // if the path represents a folder
+
+                this.Items.Clear();
+                this.LargeImageList.Images.Clear();
+                this.SmallImageList.Images.Clear();
+
+                try
+                {
+                    this.ShowFiles(path);
+                    this.ShowDirectories(path);
+                }
+                catch
+                {
+
+                }
+
+                this.SelectedNavigationNode.Expand();
+                this.SelectedNavigationNode.TreeView.SelectedNode = SelectedNavigationNode = this.SelectedNavigationNode.Nodes[Path.GetFileName(path)];
+
+                // search for Form1 Control
+                Control parent = this.Parent;
+                while (parent.Name != "Form1")
+                    parent = parent.Parent;
+
+                // parent is now Form1
+
+                // set CurrentDirectory's Text
+                (parent.Controls["StatusStrip"] as StatusStrip).Items["CurrentDirectory"].Text = path;
+
+                // Focus on NavigationPanel
+                (parent.Controls["SplitContainer"] as SplitContainer).Panel1.Controls["NavigationPanel"].Focus();
+            }
         }
     }
 }

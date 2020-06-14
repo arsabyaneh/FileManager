@@ -52,6 +52,7 @@ namespace FileManager.Controls
                 {
                     TreeNode node = new TreeNode()
                     {
+                        Name = Path.GetFileName(directory),
                         Text = (path == null) ? directory : Path.GetFileName(directory),
                         Tag = directory
                     };
