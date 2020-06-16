@@ -1,4 +1,4 @@
-## Guess Number Game
+## File Manager
 This project is a C# windows form application which implements a File Manager.
 
 ##### Details view:
