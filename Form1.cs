@@ -25,11 +25,6 @@ namespace FileManager
             InitializeViewOptions();
         }
 
-        //private void FilesListView_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         private void NavigationPanel_AfterSelect(object sender, TreeViewEventArgs e)
         {
             FilesListView.Items.Clear();
@@ -120,6 +115,13 @@ namespace FileManager
                     }
                     break;
             }
+        }
+
+        private void SearchMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchDialog searchDialog = new SearchDialog();
+            searchDialog.CurrentDirectory = this.CurrentDirectory.Text;
+            searchDialog.ShowDialog();
         }
     }
 }

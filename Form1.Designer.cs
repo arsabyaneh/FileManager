@@ -42,6 +42,7 @@
             this.CurrentDirectory = new System.Windows.Forms.ToolStripStatusLabel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.NavigationPanel = new FileManager.Controls.Navigation();
+            this.EditMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -54,6 +55,7 @@
             this.MenuStrip.BackColor = System.Drawing.SystemColors.Control;
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuItem,
+            this.EditMenuItem,
             this.ViewMenuItem,
             this.SearchMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
@@ -117,6 +119,7 @@
             this.SearchMenuItem.Name = "SearchMenuItem";
             this.SearchMenuItem.Size = new System.Drawing.Size(54, 20);
             this.SearchMenuItem.Text = "&Search";
+            this.SearchMenuItem.Click += new System.EventHandler(this.SearchMenuItem_Click);
             // 
             // StatusStrip
             // 
@@ -168,6 +171,12 @@
             this.NavigationPanel.TabIndex = 0;
             this.NavigationPanel.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.NavigationPanel_AfterSelect);
             // 
+            // EditMenuItem
+            // 
+            this.EditMenuItem.Name = "EditMenuItem";
+            this.EditMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.EditMenuItem.Text = "&Edit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +216,7 @@
         private System.Windows.Forms.ToolStripMenuItem ViewSmallIcons;
         private System.Windows.Forms.ToolStripMenuItem ViewTiles;
         private Controls.Navigation NavigationPanel;
+        private System.Windows.Forms.ToolStripMenuItem EditMenuItem;
     }
 }
 
