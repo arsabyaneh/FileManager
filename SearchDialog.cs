@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using FileManager.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,7 @@ namespace FileManager
             InitializeComponent();
 
             this.DirectoryComboBox.SelectedItem   = this.DirectoryComboBox.Items[0];
-            this.NameContentComboBox.SelectedItem = this.NameContentComboBox.Items[0];
+            this.NameContentComboBox.SelectedItem = this.NameContentComboBox.Items[2];
             this.Results = new List<Result>();
         }
 
@@ -119,20 +120,76 @@ namespace FileManager
             return result;
         }
 
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void Search_Click(object sender, EventArgs e)
         {
             SearchOption searchOption = (this.DirectoryComboBox.SelectedIndex == 0) ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories;
-            
+
+            this.ResultPanel.Controls.Clear();
+            Results.Clear();
+
             if (this.DirectoryComboBox.SelectedIndex != 2)
             {
+                if (this.CurrentDirectory == null)
+                    return;
+
                 SearchFiles(CurrentDirectory, searchOption, this.SearchQuery.Text);
                 SearchDirectories(CurrentDirectory, searchOption, this.SearchQuery.Text);
+
+                ShowSearchResults();
             }
+        }
+
+        private void ShowSearchResults()
+        {
+            this.ResultPanel.Controls.Clear();
+
+            foreach (Result result in Results)
+            {
+                SearchResult searchResult = new SearchResult();
+                searchResult.Controls["FileName"].Text = Path.GetFileNameWithoutExtension(result.FilePath);
+                searchResult.Controls["FoundText"].Text = result.FoundText;
+                searchResult.Controls["Path"].Text = result.FilePath;
+                (searchResult.Controls["Picture"] as PictureBox).Image = GetImage(result.FilePath);
+                (searchResult.Controls["Picture"] as PictureBox).SizeMode = GetSizeMode((searchResult.Controls["Picture"] as PictureBox), (searchResult.Controls["Picture"] as PictureBox).Image);
+
+                this.ResultPanel.Controls.Add(searchResult);
+                this.ResultPanel.SetFlowBreak(ResultPanel.Controls[ResultPanel.Controls.Count - 1], true);
+
+                // add separator line
+                Label Line = new Label();
+                Line.Text = string.Empty;
+                Line.AutoSize = false;
+                Line.Height = 3;
+                Line.Width = this.ResultPanel.Size.Width - 10;
+                Line.BackColor = ColorTranslator.FromHtml("#E6E6E6");
+
+                this.ResultPanel.Controls.Add(Line);
+                this.ResultPanel.SetFlowBreak(ResultPanel.Controls[ResultPanel.Controls.Count - 1], true);
+            }
+        }
+
+        private Image GetImage(string path)
+        {
+            return Directory.Exists(path) ? Properties.Resources.Folder : Properties.Resources.Doc;
+        }
+
+        private PictureBoxSizeMode GetSizeMode(PictureBox picture, Image image)
+        {
+            if (image.Width > picture.Width || image.Height > picture.Height)
+                return PictureBoxSizeMode.Zoom;
+            else
+                return PictureBoxSizeMode.CenterImage;
+        }
+
+        private void SearchDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.ResultPanel.Controls.Clear();
+            Results.Clear();
+        }
+
+        private void ResultPanel_Resize(object sender, EventArgs e)
+        {
+            ShowSearchResults();
         }
     }
 }

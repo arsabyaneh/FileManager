@@ -33,20 +33,23 @@
             this.DirectoryComboBox = new System.Windows.Forms.ComboBox();
             this.NameContentComboBox = new System.Windows.Forms.ComboBox();
             this.Search = new System.Windows.Forms.Button();
-            this.Cancel = new System.Windows.Forms.Button();
+            this.ResultPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // SearchQuery
             // 
-            this.SearchQuery.Location = new System.Drawing.Point(67, 22);
+            this.SearchQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchQuery.Location = new System.Drawing.Point(46, 14);
+            this.SearchQuery.Multiline = true;
             this.SearchQuery.Name = "SearchQuery";
-            this.SearchQuery.Size = new System.Drawing.Size(201, 20);
+            this.SearchQuery.Size = new System.Drawing.Size(222, 21);
             this.SearchQuery.TabIndex = 0;
             // 
             // QueryLabel
             // 
             this.QueryLabel.AutoSize = true;
-            this.QueryLabel.Location = new System.Drawing.Point(17, 25);
+            this.QueryLabel.Location = new System.Drawing.Point(7, 16);
             this.QueryLabel.Name = "QueryLabel";
             this.QueryLabel.Size = new System.Drawing.Size(38, 13);
             this.QueryLabel.TabIndex = 1;
@@ -54,31 +57,34 @@
             // 
             // DirectoryComboBox
             // 
+            this.DirectoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DirectoryComboBox.FormattingEnabled = true;
             this.DirectoryComboBox.Items.AddRange(new object[] {
             "Current Directory",
             "All Sub Directories",
             "This PC"});
-            this.DirectoryComboBox.Location = new System.Drawing.Point(20, 58);
+            this.DirectoryComboBox.Location = new System.Drawing.Point(274, 14);
             this.DirectoryComboBox.Name = "DirectoryComboBox";
-            this.DirectoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.DirectoryComboBox.Size = new System.Drawing.Size(120, 21);
             this.DirectoryComboBox.TabIndex = 2;
             // 
             // NameContentComboBox
             // 
+            this.NameContentComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NameContentComboBox.FormattingEnabled = true;
             this.NameContentComboBox.Items.AddRange(new object[] {
-            "Files Name",
-            "Files Content",
-            "Both"});
-            this.NameContentComboBox.Location = new System.Drawing.Point(147, 58);
+            "Name",
+            "Content",
+            "Name and Content"});
+            this.NameContentComboBox.Location = new System.Drawing.Point(400, 14);
             this.NameContentComboBox.Name = "NameContentComboBox";
-            this.NameContentComboBox.Size = new System.Drawing.Size(121, 21);
+            this.NameContentComboBox.Size = new System.Drawing.Size(120, 21);
             this.NameContentComboBox.TabIndex = 3;
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(290, 20);
+            this.Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search.Location = new System.Drawing.Point(533, 13);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(75, 23);
             this.Search.TabIndex = 4;
@@ -86,22 +92,26 @@
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
-            // Cancel
+            // ResultPanel
             // 
-            this.Cancel.Location = new System.Drawing.Point(290, 58);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
-            this.Cancel.TabIndex = 5;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
-            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+            this.ResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResultPanel.AutoScroll = true;
+            this.ResultPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.ResultPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ResultPanel.Location = new System.Drawing.Point(10, 47);
+            this.ResultPanel.Name = "ResultPanel";
+            this.ResultPanel.Size = new System.Drawing.Size(596, 342);
+            this.ResultPanel.TabIndex = 6;
+            this.ResultPanel.Resize += new System.EventHandler(this.ResultPanel_Resize);
             // 
             // SearchDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 106);
-            this.Controls.Add(this.Cancel);
+            this.ClientSize = new System.Drawing.Size(618, 396);
+            this.Controls.Add(this.ResultPanel);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.NameContentComboBox);
             this.Controls.Add(this.DirectoryComboBox);
@@ -110,6 +120,7 @@
             this.Name = "SearchDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchDialog_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,6 +133,6 @@
         private System.Windows.Forms.ComboBox DirectoryComboBox;
         private System.Windows.Forms.ComboBox NameContentComboBox;
         private System.Windows.Forms.Button Search;
-        private System.Windows.Forms.Button Cancel;
+        private System.Windows.Forms.FlowLayoutPanel ResultPanel;
     }
 }
